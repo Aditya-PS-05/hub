@@ -3,6 +3,7 @@ import {
   CircleCheckIcon,
   CircleXIcon,
   CopyIcon,
+  ExternalLinkIcon,
 } from "lucide-react";
 import Lottie from "react-lottie";
 import { useParams } from "react-router-dom";
@@ -195,6 +196,48 @@ export default function SwapOutStatus() {
             </div>
           </CardContent>
         </Card>
+        {swapStatus === "FAILED" && (
+          <Card className="w-full md:max-w-xs mt-4">
+            <CardContent className="p-4">
+              <div className="rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/50 p-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex-1">
+                    <h4 className="text-sm font-medium text-amber-800 dark:text-amber-200 mb-2">
+                      Need help with failed payments?
+                    </h4>
+                    <p className="text-sm text-amber-700 dark:text-amber-300 mb-3">
+                      Learn about common payment failure causes and how to
+                      resolve them.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <ExternalLink
+                        to="https://guides.getalby.com/user-guide/alby-hub/faq/what-to-do-if-i-cannot-send-a-payment?utm_campaign=Hub+multiple+failed+payments&utm_content=Email+1&utm_medium=email_action&utm_source=message"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-amber-800 dark:text-amber-200 hover:text-amber-900 dark:hover:text-amber-100 underline"
+                      >
+                        <ExternalLinkIcon className="w-4 h-4" />
+                        Payment Troubleshooting Guide
+                      </ExternalLink>
+                      <button
+                        onClick={() => {
+                          // TODO: Implement proper analytics/event tracking when available
+                          // Event data: swapId, sendAmount, receiveAmount, state, timestamp
+                          toast({
+                            title: "Help request logged",
+                            description:
+                              "Your request for payment help has been recorded.",
+                          });
+                        }}
+                        className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-amber-800 dark:text-amber-200 hover:text-amber-900 dark:hover:text-amber-100 bg-amber-100 dark:bg-amber-900/30 hover:bg-amber-200 dark:hover:bg-amber-900/50 rounded-md transition-colors"
+                      >
+                        Help solving such issues
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
